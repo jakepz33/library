@@ -17,24 +17,35 @@
         </div>
     </header>
     <div class="main-content">
+        <dialog style="border-radius: 12px 12px;">
+            <div>
+                <p class="flex-item" style="font-size: 2rem;">Enter new book information</p>
+                <input class="flex-item" id="title" type="text" name="name" placeholder="Title">
+                <input class="flex-item" id="author" type="text" name="name" placeholder="Author">
+                <input class="flex-item" id="pages" type="number" name="name" placeholder="Pages">
+                <div class="flex-item readcheck">
+                    <label for="have-read">Have you read it?</label>
+                    <input type="checkbox" id="have-read" value="completed">
+                </div>
+                <button id="submit-button" class="flex-item" style="background-color: rgb(129, 233, 155);">Submit</button>
+            </div>
+        </dialog>
         <div class="add-button">
             <a class="add-book" href="#" style="text-decoration: none;"><span>+</span> Add Book</a>
         </div>
         <div class="added-books">
-            <div class="card">
-                <div><p>Title</p></div>
-                <div><p>Author</p></div>
-                <div><p>Page</p></div>
-                <div class="button-group read-blue">
+            <!-- <div class="card">
+                <p>Title</p>
+                <p>Author</p>
+                <p>Page</p>
+                <div class="button-group">
+                  
                     <button id="read">Read</button>
-                </div>
-                <div class="button-group remove">
                     <button id="remove">Remove</button>
+                
                 </div>
-            </div>
-            <div class="card">
-                3
-            </div>
+            </div> -->
+            
             
             
             
