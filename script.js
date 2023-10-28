@@ -2,47 +2,42 @@
 
 
 const library = document.querySelector('.added-books');
-
 const myLibrary = [];
-
 const dialog = document.querySelector("dialog")
 const showButton = document.querySelector(".add-book")
 const submitButton = document.querySelector("dialog button")
-let count = 0
 
-// dialog test
-
+// Display Dialog 
 showButton.addEventListener("click", () => {
     dialog.showModal();
 })
 
 
+// When Dialog form is submitted
 submitButton.addEventListener("click", () => {
+    // assigned dialog elements
     const titleInput = document.getElementById('title');
     const authorInput = document.getElementById('author');
     const pagesInput = document.getElementById('pages');
     const haveReadCheckbox = document.getElementById('have-read');
 
-    const title = titleInput.value 
-    const author = authorInput.value
-    const pages = pagesInput.value;
-    const haveRead = haveReadCheckbox.checked;
-    //const haveRead = haveReadCheckbox.value ? "Read" : "Not Read";
+    // initialize value holder variables
+    let title, author, pages, haveRead;
 
-    console.log(`Title ${title}`)
-    console.log(`Author ${author}`)
-    console.log(`Pages ${pages}`)
-    console.log(haveReadCheckbox);
-
-    let bookCount = `Book count ${count}`
-    console.log(bookCount);
-
-    let addBook = new Book(title, author, pages, haveRead, count);
-    myLibrary.push(addBook)
-
-    console.log(addBook)
-    count += 1
+    // to make sure each field is completed
+    if (titleInput.checkValidity() && authorInput.checkValidity() && pagesInput.checkValidity()) {
+        title = titleInput.value;
+        author = authorInput.value;
+        pages = pagesInput.value;
+        haveRead = haveReadCheckbox.checked;
+    } else {
+        alert("Please gill out all the required fields.");
+        return;
+    }
     
+    // create new Book object and add to array
+    let addBook = new Book(title, author, pages, haveRead);
+    myLibrary.push(addBook)
     
     // clear value and innerHTML
     titleInput.value = ""
@@ -56,20 +51,20 @@ submitButton.addEventListener("click", () => {
     dialog.close();
 })
 
-// function dialogClear(title, author, pages, haveRead) {
+document.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+        dialog.close();
+    }
+})
 
-// }
-
+// Book object
 function Book(title, author, pages, read) {
-    // the constructor
    this.title = title
    this.author = author
    this.pages = pages
    this.read = read
-   // this.read => need to make it call a function to change view?
 }
 
-// let buttonRemove = document.createElement('button')
 
 function addBookToLibrary() {
     myLibrary.forEach(function(book, index) { // for each item in list this is what going to happen
@@ -98,14 +93,17 @@ function addBookToLibrary() {
         buttonRemove.textContent = "Remove"
 
         buttonRead.textContent = book.read ? "Read" : "Not Read"; // if checked = True
-        buttonRead.style.background = book.read ? "rgb(4, 173, 4)" : "rgb(225, 225, 225)";
+        buttonRead.style.background = book.read ? "rgb(129, 233, 155)" : "rgb(233, 233, 233)";
+
+        //toggle read or not read
         buttonRead.addEventListener("click", () => {
             book.read = !book.read; // if false: toggles it
 
             buttonRead.textContent = book.read ? "Read" : "Not Read";
-            buttonRead.style.backgroundColor = book.read ? "rgb(4, 173, 4)" : "rgb(225, 225, 225)";
+            buttonRead.style.backgroundColor = book.read ? "rgb(129, 233, 155)" : "rgb(233, 233, 233)";
         })
-    
+        
+        //remove item from DOM and array
         buttonRemove.addEventListener("click", () => {
             const indexToRemove = index;
             myLibrary.splice(indexToRemove, 1);
@@ -115,6 +113,7 @@ function addBookToLibrary() {
             console.log("This is working")
             console.log(myLibrary);
         })
+
         buttongroup.appendChild(buttonRead)
         buttongroup.appendChild(buttonRemove)
         card.appendChild(title)
@@ -128,11 +127,4 @@ function addBookToLibrary() {
 
 
 
-function processLibrary(library) {
-    library.forEach(function (item) {
-        addBookToLibrary(item)
-        console.log(item);
-    })
-}
 
-processLibrary(myLibrary);
