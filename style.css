@@ -2,6 +2,7 @@ html {
     font-size: 62.5%;
     margin: 0;
     padding: 0;
+    font-family: 'Gabarito', sans-serif; 
 }
 body {
     background-color: rgb(201, 243, 243);
@@ -175,4 +176,17 @@ dialog > div {
 }
 #submit-button:active {
     background-color: brown !important;
+}
+#removeButtonID {
+    background-color: rgb(215, 52, 52);
+    color: white;
+    border: none;
+}
+.readButton {
+    background-color: rgb(225, 225, 225);
+    border: none;
+}
+
+.read {
+    background-color: rgb(4, 173, 4);
 }
